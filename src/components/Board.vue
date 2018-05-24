@@ -1,7 +1,8 @@
 <template>
     <div class="board-frame">
-        <tile>{{msg}}</tile>
-
+        <tile v-for="tile in tilesArray" :key="tile.position">
+            {{ tile.value }}
+        </tile>
     </div>
 </template>
 
@@ -14,9 +15,23 @@ export default {
     },
     data(){
         return {
-            msg: 'Hi'
+            msg: 'Hi',
+
+            tilesArray: [
+                { value: 1,  position: 1 },
+                { value: 2,  position: 2 },
+                { value: 3,  position: 3 },
+                { value: 4,  position: 4 },
+                { value: 5,  position: 5 },
+                { value: 6,  position: 6 },
+                { value: 7,  position: 7 },
+                { value: 8,  position: 8 },
+                { value: '', position: 9 }
+
+            ]
         }
-    }   
+    },
+     
 }
 </script>
 
