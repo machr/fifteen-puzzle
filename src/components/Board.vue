@@ -33,34 +33,49 @@ export default {
                 { value: '7',     position: [3, 1], moveable: false },
                 { value: '8',     position: [3, 2], moveable: false },
                 { value: null,    position: [3, 3], moveable: true }
-            ]
+            ],
+
+            activeTile: '',
         }
     },
-
 
     methods: {
         // get current coordinates of the blank tile from the hardcoded array
          getBlankTile: function() {
             
+            // Filter tilesArray for the blank tile with the value of null
             let blankTile = this.tilesArray.filter( tile => tile.value == null);
 
             // tilesArray.filter returns an Array with 1 element. Reassign blankTile to that only element.
             blankTile = blankTile[0];
 
+            let col = blankTile.position[0];
+            let row = blankTile.position[0];
 
-            let blankTileX = blankTile.position[0]
-            return blankTileX;
+            
+            console.log( `Blank tile: ${ col }, ${ row }`);
+            return `${ col }, ${ row }`;
         },
 
         setActiveTile: function(value) {
-            let activeTile;
-            console.log(value)
+            
+            let activeTile = value;
+            console.log(`Active tile: ${activeTile}`);
+            
+            return activeTile;
+        },
+
+        compareTiles: function() {
+            // make computed properties for each
+            this.getBlankTile;        
         }
+
+        
     },
 
-    mounted () {
-        console.log( this.getBlankTile() )
-    }
+    created () {
+        console.log( this.getBlankTile() );
+    },
      
 }
 </script>

@@ -52,7 +52,7 @@ export default {
 
 <style lang="scss" scoped>
     .board-tile {
-        background-color: rgba(100,0,0, 0.3);
+        background-color: whitesmoke;
     }
     .blank {
         background-color: #10181F;
