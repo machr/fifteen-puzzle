@@ -3,7 +3,8 @@
         <tile 
             v-for="tile in tilesArray" 
             :key="tile.id"
-            :tile="tile" 
+            :tile="tile"
+            @clicked="setActiveTile" 
         >
         </tile>
     </div>
@@ -21,25 +22,44 @@ export default {
     },
     data() {
         return {
-
-            // TODO: create a function that makes a tilesArray with the given argument**2 (squared)
-            // For now:  Hardcode tiles in array
+            // TODO: create a function that makes a tilesArray with the given argument**2 (squared). For now:  Hardcode tiles in array
             tilesArray: [
-                { value: '1',     position: [1, 1] },
-                { value: '2',     position: [1, 2] },
-                { value: '3',     position: [1, 3] },
-                { value: '4',     position: [2, 1] },
-                { value: '5',     position: [2, 2] },
-                { value: '6',     position: [2, 3] },
-                { value: '7',     position: [3, 1] },
-                { value: '8',     position: [3, 2] },
-                { value: null,    position: [3, 3] }
+                { value: '1',     position: [1, 1], moveable: false },
+                { value: '2',     position: [1, 2], moveable: false },
+                { value: '3',     position: [1, 3], moveable: false },
+                { value: '4',     position: [2, 1], moveable: false },
+                { value: '5',     position: [2, 2], moveable: false },
+                { value: '6',     position: [2, 3], moveable: false },
+                { value: '7',     position: [3, 1], moveable: false },
+                { value: '8',     position: [3, 2], moveable: false },
+                { value: null,    position: [3, 3], moveable: true }
             ]
         }
     },
 
+
+    methods: {
+        // get current coordinates of the blank tile from the hardcoded array
+         getBlankTile: function() {
+            
+            let blankTile = this.tilesArray.filter( tile => tile.value == null);
+
+            // tilesArray.filter returns an Array with 1 element. Reassign blankTile to that only element.
+            blankTile = blankTile[0];
+
+
+            let blankTileX = blankTile.position[0]
+            return blankTileX;
+        },
+
+        setActiveTile: function(value) {
+            let activeTile;
+            console.log(value)
+        }
+    },
+
     mounted () {
-        makeMoves(); // Should console.log if imported and called correctly
+        console.log( this.getBlankTile() )
     }
      
 }

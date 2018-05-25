@@ -1,6 +1,6 @@
 <template>
     <button 
-        @click="getCoordinates()" 
+        @click="getTileCoordinates()" 
         :class=" !tile.value ? 'blank' : 'board-tile'"   
         class="board-tile">
 
@@ -42,8 +42,8 @@ export default {
     },
 
     methods: {
-        getCoordinates: function() {
-            console.log( this.coordinates );
+        getTileCoordinates: function(event) {
+            this.$emit('clicked', this.coordinates)
         }     
     },
     
