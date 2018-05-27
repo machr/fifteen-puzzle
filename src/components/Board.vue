@@ -4,15 +4,13 @@
             v-for="tile in tilesArray" 
             :key="tile.id"
             :tile="tile"
-            @clicked="setActiveTile" 
+            @clicked="getClickedTile" 
         >
         </tile>
     </div>
 </template>
 
 <script>
-
-import makeMoves from '../lib/makeTileMoves';
 import Tile from './Tile';
 
 export default {
@@ -22,7 +20,6 @@ export default {
     },
     data() {
         return {
-            // TODO: create a function that makes a tilesArray with the given argument**2 (squared). For now:  Hardcode tiles in array
             tilesArray: [
                 { value: '1',     position: [1, 1], moveable: false },
                 { value: '2',     position: [1, 2], moveable: false },
@@ -35,46 +32,49 @@ export default {
                 { value: null,    position: [3, 3], moveable: true }
             ],
 
+            // TODO: create a function that makes a tilesArray with the given argument**2 (squared). For now:  Hardcode tiles in array
+        
             activeTile: '',
+            blankTile: ''
         }
     },
 
     methods: {
         // get current coordinates of the blank tile from the hardcoded array
-         getBlankTile: function() {
-            
+
+        getBlankTile: function() {
+        
             // Filter tilesArray for the blank tile with the value of null
             let blankTile = this.tilesArray.filter( tile => tile.value == null);
-
             // tilesArray.filter returns an Array with 1 element. Reassign blankTile to that only element.
             blankTile = blankTile[0];
 
             let col = blankTile.position[0];
-            let row = blankTile.position[0];
+            let row = blankTile.position[1];
 
-            
             console.log( `Blank tile: ${ col }, ${ row }`);
-            return `${ col }, ${ row }`;
+            this.blankTile = `${ col }, ${ row }`;   
         },
 
-        setActiveTile: function(value) {
+        getClickedTile: function(value) {
+            let clickedTileValue = value;
+            console.log(`Active tile: ${clickedTileValue}`);
+            this.activeTile = clickedTileValue
             
-            let activeTile = value;
-            console.log(`Active tile: ${activeTile}`);
-            
-            return activeTile;
         },
 
         compareTiles: function() {
             // make computed properties for each
-            this.getBlankTile;        
+            blankTile: getBlankTile();
+            activeTile: this.getActiveTile();
+            console.log(`active tile: ${this.activeTile}, blank tile: ${getBlankTile}`)        
         }
 
         
     },
 
-    created () {
-        console.log( this.getBlankTile() );
+    mounted () {
+     this.getBlankTile();
     },
      
 }
