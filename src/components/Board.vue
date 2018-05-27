@@ -32,6 +32,7 @@ export default {
                 { value: '8',     position: [3, 2] },
                 { value: 'blank', position: [3, 3] }
             ],
+
             blankTile: {}
         }
     },
@@ -73,11 +74,14 @@ export default {
 <style lang="scss">
     .board {
         &-frame {
-            height: 500px;
-            width: 500px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-wrap: wrap;
             box-sizing: border-box;
+
+            border: 2px solid red;
         }
         &-tile {
             width: calc(100% / 3);

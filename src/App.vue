@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <h1>{{ msg}}</h1>
-    <Board/>
+    <div class="container">
+      <Board/>
+    </div>
   </div>
 </template>
 
@@ -31,6 +33,21 @@ export default {
     justify-content: center;
     flex-direction: column;
     color: #2c3e50;
-    margin-top: 60px;
+    //margin-top: 60px;
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+
+  .container {
+    height: 0;
+    width: 40%;
+    padding-bottom: 40%;
+    position: relative;
+    color: white;
+    &:after {
+      content: "";
+      display: block;
+      
+    }
   }
 </style>
