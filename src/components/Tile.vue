@@ -1,10 +1,8 @@
 <template>
-    <button 
-        @click="getTileCoordinates()"   
-        class="board-tile">
-
+    <button @click="getTileCoordinates()" class="board-tile"
+            :class="{ 'blank': !showTileValue }"
+    >
         {{ showTileValue }}
-        
     </button>
 </template>
 

@@ -33,8 +33,7 @@ export default {
             ],
 
             // TODO: create a function that makes a tilesArray with the given argument**2 (squared). For now:  Hardcode tiles in array
-        
-            clickedTile: {},
+    
             blankTile: {}
         }
     },
@@ -47,27 +46,36 @@ export default {
             this.blankTile = this.tilesArray.filter( tile => tile.value == 'blank')[0];
             console.log(this.blankTile.value);
         },
-        /* 
-        // create function to swap values    
-        swapTilesValues: function(a, b) {
-                b = a
-                a = 'blank'
-        }, */
 
         moveTiles: function(tileValue) {
-            let blankTile = this.tilesArray.filter( tile => tile.value == 'blank')[0];
+            this.blankTile = this.tilesArray.filter( tile => tile.value == 'blank')[0];
             let clickedTile = this.tilesArray.filter(tile => tile.value == tileValue)[0];
-            blankTile.value = clickedTile.value;
+            this.blankTile.value = clickedTile.value;
             clickedTile.value = 'blank';
-            console.log();
-  
+
+            this.checkCorrectOrder(this.tilesArray)
+        },
+
+        checkCorrectOrder: function(arr) { 
+            const IN_ORDER = "1,2,3,4,5,6,7,8,blank";
+            let currentOrder = arr.map( elem => elem.value).join();
+            console.log(currentOrder);
+            console.log(IN_ORDER);
+            
+            if (currentOrder == IN_ORDER ) {
+                console.log('you win');
+            }
         }
 
     },
 
-    mounted () {
+    mounted() {
         this.getBlankTile();
     },
+
+    updated() {
+        console.log('updated')
+    }
      
 }
 </script>
