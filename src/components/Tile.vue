@@ -1,7 +1,6 @@
 <template>
     <button 
-        @click="getTileCoordinates()" 
-        :class=" !tile.value ? 'blank' : 'board-tile'"   
+        @click="getTileCoordinates()"   
         class="board-tile">
 
         {{ showTileValue }}
@@ -23,22 +22,10 @@ export default {
 
     computed: {
         showTileValue: function() {
-           if(this.tile.value) {
+           if(this.tile.value != 'blank') {
                return this.tile.value
            }  
-        },    
-
-        coordX: function () {
-            return this.tile.position[0];
         },
-
-        coordY: function () {
-            return this.tile.position[1];
-        },
-
-        coordinates: function () {
-            return `${this.coordX}, ${this.coordY}`
-        }
     },
 
     methods: {
