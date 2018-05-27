@@ -4,6 +4,9 @@
 Create a tile puzzle interface that consists of a frame divided into even tiles with one tile missing. These tiles should then be randomised so that user interaction is required to resolve the original frame. Tiles may only be moved into the empty position.
 
 
+### Link to the state of the app after 4 hours
+[Fifteen Puzzle on Github Pages](https://machr.github.io/fifteen-puzzle/)
+
 ### Technology used
 * ES6
 * Vue + vue-cli to generate the project
