@@ -42,7 +42,7 @@ export default {
     }
     .blank {
         background-color: #10181F;
-        color: gainsboro;    
+        color: gainsboro; 
     }
 </style>
 
