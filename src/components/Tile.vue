@@ -43,7 +43,8 @@ export default {
 
     methods: {
         getTileCoordinates: function(event) {
-            this.$emit('clicked', this.coordinates)
+            // send back tile's object (coordinates, value, position etc)
+            this.$emit('clicked', this.tile.value)
         }     
     },
     
