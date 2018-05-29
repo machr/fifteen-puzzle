@@ -1,12 +1,17 @@
 <template>
-    <div class="board-frame">
-        <tile 
-            v-for="tile in tilesArray" 
-            :key="tile.id"
-            :tile="tile"
-            @clicked="moveTiles"
-        >
-        </tile>
+    <div>
+        <h2 class="solved" v-if="isSolved">You Solved It!</h2>
+        <div class="board-frame">
+            <tile 
+                v-for="tile in tilesArray" 
+                :key="tile.id"
+                :tile="tile"
+                @clicked="moveTiles"
+            >
+            </tile>
+        </div>
+        <div @click="randomizeBoard" class="reset-board">Shuffle Board</div>
+        
     </div>
 </template>
 
@@ -22,18 +27,19 @@ export default {
         return {
             // TODO: create a function that makes a tilesArray with the given argument**2 (squared). For now:  Hardcode tiles in array
             tilesArray: [
-                { value: '3',     position: [1, 1] },
+                { value: '1',     position: [1, 1] },
                 { value: '2',     position: [1, 2] },
-                { value: '1',     position: [1, 3] },
-                { value: '7',     position: [2, 1] },
+                { value: '3',     position: [1, 3] },
+                { value: '4',     position: [2, 1] },
                 { value: '5',     position: [2, 2] },
                 { value: '6',     position: [2, 3] },
-                { value: '4',     position: [3, 1] },
-                { value: '8',     position: [3, 2] },
-                { value: 'blank', position: [3, 3] }
+                { value: '7',     position: [3, 1] },
+                { value: 'blank', position: [3, 2] },
+                { value: '8',     position: [3, 3] }
             ],
 
-            blankTile: {}
+            blankTile: {},
+            isSolved: false
         }
     },
 
@@ -43,28 +49,52 @@ export default {
             this.blankTile = this.tilesArray.find( tile => tile.value == 'blank');
         },
 
+        checkIfValidMove: function(blankTile, clickedTile) {
+            let blankCol = blankTile.position[0];
+            let blankRow = blankTile.position[1];
+            let clickedCol = clickedTile.position[0];
+            let clickedRow = clickedTile.position[1];
+            
+
+            if( (blankCol === clickedCol) && (blankRow - clickedRow === 1 || blankRow - clickedRow == -1 )) {
+                this.blankTile.value = clickedTile.value;
+                clickedTile.value = 'blank';
+                this.checkCorrectOrder(this.tilesArray);
+            } else if ( (blankRow === clickedRow) && (blankCol - clickedCol === 1 || blankCol - clickedCol == -1 )) {
+                this.blankTile.value = clickedTile.value;
+                clickedTile.value = 'blank';
+                this.checkCorrectOrder(this.tilesArray);         
+            } else {
+                console.log("Not valid move");      
+            }
+
+        },
+
         moveTiles: function(tileValue) {
             this.blankTile = this.tilesArray.find( tile => tile.value == 'blank');
             let clickedTile = this.tilesArray.find(tile => tile.value == tileValue);
             
-            this.blankTile.value = clickedTile.value;
-            clickedTile.value = 'blank';
-
-            this.checkCorrectOrder(this.tilesArray)
+            if ( this.checkIfValidMove(this.blankTile, clickedTile) ) {
+                this.blankTile.value = clickedTile.value;
+                clickedTile.value = 'blank';
+                this.checkCorrectOrder(this.tilesArray)
+            }
         },
 
         checkCorrectOrder: function(arr) { 
             const IN_ORDER = "1,2,3,4,5,6,7,8,blank";
             let currentOrder = arr.map( elem => elem.value).join();
+            if (currentOrder === IN_ORDER) { this.isSolved = true }
+        },
 
-            if (currentOrder == IN_ORDER ) {
-                console.log('you win');
-            }
+        randomizeBoard: function(arr) {
+            arr.sort( () => Math.random() - 0.5 );
         }
 
     },
 
     mounted() {
+        //this.randomizeBoard(this.tilesArray);
         this.getBlankTile();
     },
      
@@ -74,14 +104,12 @@ export default {
 <style lang="scss">
     .board {
         &-frame {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            position: relative;
+            width: 500px;
+            height: 500px;
             display: flex;
             flex-wrap: wrap;
             box-sizing: border-box;
-
-            border: 2px solid red;
         }
         &-tile {
             width: calc(100% / 3);
@@ -95,6 +123,19 @@ export default {
             &:focus {
                 outline: none;
             }
+        }
+    }
+    .reset-board {
+        text-align: center;
+        margin: 0.5rem 0;
+        color: black;
+        border: 1px solid gainsboro;
+        padding: 0.5rem;
+        transition: all .3s;
+        &:hover {
+            background-color: whitesmoke;
+            border: 1px solid whitesmoke;
+            transition: all .3s;
         }
     }
 </style>

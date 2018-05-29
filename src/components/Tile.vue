@@ -41,7 +41,7 @@ export default {
         background-color: whitesmoke;
     }
     .blank {
-        background-color: gainsboro;
+        background-color: mistyrose;
     }
 </style>
 

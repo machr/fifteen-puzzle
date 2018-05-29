@@ -33,21 +33,20 @@ export default {
     justify-content: center;
     flex-direction: column;
     color: #2c3e50;
-    //margin-top: 60px;
-    min-height: 100vh;
-    min-width: 100vw;
+    height: 100vh;
+    width: 100vw;
   }
 
-  .container {
-    height: 0;
-    width: 40%;
-    padding-bottom: 40%;
-    position: relative;
-    color: white;
-    &:after {
-      content: "";
-      display: block;
-      
-    }
+
+  .solved {
+      color: black;
+      text-align: center;
+      background: yellow;
+      padding: 0.5rem 0;
   }
+  h1, h2 {
+    margin: 0.5rem;
+  }
+
+
 </style>
