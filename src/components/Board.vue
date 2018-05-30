@@ -10,13 +10,13 @@
             >
             </tile>
         </div>
-        <div @click="randomizeBoard" class="reset-board">Shuffle Board</div>
-        
+        <div @click="randomizeBoard(tilesArray, valuesArray)" class="reset-board">Shuffle Board</div>
     </div>
 </template>
 
 <script>
 import Tile from './Tile';
+import shuffleArray from './lib/fisher-yates.js';
 
 export default {
     name: 'board',
@@ -26,16 +26,17 @@ export default {
     data() {
         return {
             // TODO: create a function that makes a tilesArray with the given argument**2 (squared). For now:  Hardcode tiles in array
+            valuesArray: ['1','2','3','4','5','6','7','blank','8'],
             tilesArray: [
-                { value: '1',     position: [1, 1] },
-                { value: '2',     position: [1, 2] },
-                { value: '3',     position: [1, 3] },
-                { value: '4',     position: [2, 1] },
-                { value: '5',     position: [2, 2] },
-                { value: '6',     position: [2, 3] },
-                { value: '7',     position: [3, 1] },
-                { value: 'blank', position: [3, 2] },
-                { value: '8',     position: [3, 3] }
+                { value: null,  position: [1, 1] },
+                { value: null,  position: [1, 2] },
+                { value: null,  position: [1, 3] },
+                { value: null,  position: [2, 1] },
+                { value: null,  position: [2, 2] },
+                { value: null,  position: [2, 3] },
+                { value: null,  position: [3, 1] },
+                { value: null,  position: [3, 2] },
+                { value: null,  position: [3, 3] }
             ],
 
             blankTile: {},
@@ -87,14 +88,18 @@ export default {
             if (currentOrder === IN_ORDER) { this.isSolved = true }
         },
 
-        randomizeBoard: function(arr) {
-            arr.sort( () => Math.random() - 0.5 );
-        }
+        randomizeBoard: function(tilesArray, valuesArray) {
+            const shuflled = shuffleArray(valuesArray);
+            let i;
+            for(i = 0; i < tilesArray.length; i++) {
+                tilesArray[i].value = valuesArray[i];
+            }   
+        },
 
     },
 
     mounted() {
-        //this.randomizeBoard(this.tilesArray);
+        this.randomizeBoard(this.tilesArray, this.valuesArray);
         this.getBlankTile();
     },
      
