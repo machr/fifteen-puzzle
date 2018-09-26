@@ -19,7 +19,7 @@ export default {
     },
 
     computed: {
-        showTileValue: function() {
+        showTileValue() {
            if(this.tile.value != 'blank') {
                return this.tile.value
            }  
@@ -27,7 +27,7 @@ export default {
     },
 
     methods: {
-        getTileCoordinates: function(event) {
+        getTileCoordinates(event) {
             // send back tile's object (coordinates, value, position etc)
             this.$emit('clicked', this.tile.value)
         }     

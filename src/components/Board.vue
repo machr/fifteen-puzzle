@@ -46,11 +46,11 @@ export default {
 
     methods: {
         // get current coordinates of the blank tile from the hardcoded array
-        getBlankTile: function() {
+        getBlankTile() {
             this.blankTile = this.tilesArray.find( tile => tile.value == 'blank');
         },
 
-        checkIfValidMove: function(blankTile, clickedTile) {
+        checkIfValidMove(blankTile, clickedTile) {
             let blankCol = blankTile.position[0];
             let blankRow = blankTile.position[1];
             let clickedCol = clickedTile.position[0];
@@ -71,7 +71,7 @@ export default {
 
         },
 
-        moveTiles: function(tileValue) {
+        moveTiles(tileValue) {
             this.blankTile = this.tilesArray.find( tile => tile.value == 'blank');
             let clickedTile = this.tilesArray.find(tile => tile.value == tileValue);
             
@@ -82,13 +82,13 @@ export default {
             }
         },
 
-        checkCorrectOrder: function(arr) { 
+        checkCorrectOrder(arr) { 
             const IN_ORDER = "1,2,3,4,5,6,7,8,blank";
             let currentOrder = arr.map( elem => elem.value).join();
             if (currentOrder === IN_ORDER) { this.isSolved = true }
         },
 
-        randomizeBoard: function(tilesArray, valuesArray) {
+        randomizeBoard(tilesArray, valuesArray) {
             const shuflled = shuffleArray(valuesArray);
             let i;
             for(i = 0; i < tilesArray.length; i++) {
